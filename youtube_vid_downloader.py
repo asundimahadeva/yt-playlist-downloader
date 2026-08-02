@@ -336,11 +336,13 @@ def main():
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
         
-    # Automatic post-download cleanup: delete non-mp4 leftover files (.vtt, .webm, etc.)
+    # Safe cleanup: only delete specific temp/subtitle leftover files created during download (.vtt, .srt, .webm, .part, .ytdl, etc.)
+    temp_extensions = ('.vtt', '.srt', '.webm', '.part', '.ytdl', '.3gp', '.m4a')
     target_dir = output_folder
     for root, _, files in os.walk(target_dir):
         for file in files:
-            if not file.lower().endswith(".mp4") and not file.lower().endswith(".html"):
+            f_lower = file.lower()
+            if any(f_lower.endswith(ext) for ext in temp_extensions) or ('.f' in f_lower and f_lower.endswith('.mp4') and not re.search(r'^\d+\s*-\s*', file)):
                 filepath = os.path.join(root, file)
                 try:
                     os.remove(filepath)
