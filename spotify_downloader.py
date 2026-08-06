@@ -73,7 +73,8 @@ def download_spotify_track(url: str, output_dir: str, audio_format: str, bitrate
         sys.executable, "-m", "spotdl", url, 
         "--format", audio_format, 
         "--bitrate", bitrate,
-        "--ffmpeg", ffmpeg_path
+        "--ffmpeg", ffmpeg_path,
+        "--preload"
     ]
     
     if organize:
