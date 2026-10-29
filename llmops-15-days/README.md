@@ -11,6 +11,7 @@ A 15-day learning-in-public challenge: fine-tune a small open-source LLM, then r
 - **Local:** NVIDIA GTX GPU with Docker + NVIDIA Container Toolkit, and a local Kubernetes cluster (kind, minikube or k3s) with the NVIDIA device plugin.
 - **Cloud (free or cheap):** Google Colab (T4), Kaggle notebooks, Hugging Face Spaces / ZeroGPU / Inference Endpoints, and pay-per-second options such as Modal, RunPod or Lightning AI. Free-tier limits change, so check them before relying on any.
 - **Check your GPU first:** run `nvidia-smi` and note the model and VRAM. QLoRA on a 0.5B–1.5B model typically needs about 6–8 GB. Older GTX cards (Pascal, 10-series) are not supported by vLLM; use llama.cpp for serving on those.
+- **Laptop notes:** laptop GTX GPUs often have only 4–6 GB VRAM, so plan to train on Colab/Kaggle and use the laptop for inference, Docker, Kubernetes and Terraform. On Windows, run Docker Desktop with the WSL2 backend and the NVIDIA driver on the Windows side (GPU passthrough works in WSL2). Plug in the charger, use the performance power mode and watch temperatures during long runs.
 
 ## Plan
 
